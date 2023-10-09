@@ -74,12 +74,12 @@ class Action(ABC):
                 if match:
                     content = match
                     break
-
+            # NOTE(jiahang): seems like an output decoder
             parsed_data = CustomDecoder(strict=False).decode(content)
 
         else:  # using markdown parser
             parsed_data = OutputParser.parse_data_with_mapping(content, output_data_mapping)
-
+        # NOTE(jiahang): seems the output **completely** follow the format rules and thus can be parsed. really??
         logger.debug(parsed_data)
         instruct_content = output_class(**parsed_data)
         return ActionOutput(content, instruct_content)

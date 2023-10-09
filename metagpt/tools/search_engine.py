@@ -66,7 +66,7 @@ class SearchEngine:
         self.engine = engine
         self.run_func = run_func
 
-    @overload
+    @overload # TODO(jiahang): learn
     def run(
         self,
         query: str,
@@ -83,7 +83,7 @@ class SearchEngine:
         as_string: Literal[False] = False,
     ) -> list[dict[str, str]]:
         ...
-
+    # TODO(jiahang): learn when async
     async def run(self, query: str, max_results: int = 8, as_string: bool = True) -> Union[str, list[dict[str, str]]]:
         """Run a search query.
 

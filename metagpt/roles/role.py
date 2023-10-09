@@ -35,7 +35,7 @@ Please note that the answer only needs a number, no need to add any other text.
 If there is no conversation record, choose 0.
 Do not answer anything else, and do not add any other information in your answer.
 """
-
+# Note(jiahang): to force LLM to follow a specific order, multiple same prompts are needed
 ROLE_TEMPLATE = """Your response should be based on the previous conversation history and the current conversation stage.
 
 ## Current conversation stage
@@ -181,7 +181,7 @@ class Role:
         """Observe from the environment, obtain important information, and add it to memory"""
         if not self._rc.env:
             return 0
-        env_msgs = self._rc.env.memory.get()
+        env_msgs = self._rc.env.memory.get() # TODO(jiahang): env_msgs vs observed? news vs memory?
 
         observed = self._rc.env.memory.get_by_actions(self._rc.watch)
         

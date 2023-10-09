@@ -217,7 +217,7 @@ OUTPUT_MAPPING = {
     "Anything UNCLEAR": (str, ...),
 }
 
-
+# TODO(jiahang): json vs markdown version of prompts?
 class WritePRD(Action):
     def __init__(self, name="", context=None, llm=None):
         super().__init__(name, context, llm)

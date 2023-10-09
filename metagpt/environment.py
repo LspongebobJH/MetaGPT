@@ -59,9 +59,9 @@ class Environment(BaseModel):
         # rsp = await self.manager.handle(message, self)
         # self.message_queue.put(rsp)
         for _ in range(k):
-            futures = []
+            futures = [] # TODO(jiahang): any COT or ReAct or tool using?
             for role in self.roles.values():
-                future = role.run()
+                future = await role.run() # TODO(jiahang): debug
                 futures.append(future)
 
             await asyncio.gather(*futures)

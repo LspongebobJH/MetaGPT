@@ -161,7 +161,7 @@ class OpenAIGPTAPI(BaseGPTAPI, RateLimiter):
 
     async def _achat_completion_stream(self, messages: list[dict]) -> str:
         response = await openai.ChatCompletion.acreate(**self._cons_kwargs(messages), stream=True)
-
+        # TODO(jiahang): any output parser? If not, LLM output can completely follow user format rules? (seems no output parser)
         # create variables to collect the stream of chunks
         collected_chunks = []
         collected_messages = []
@@ -225,7 +225,7 @@ class OpenAIGPTAPI(BaseGPTAPI, RateLimiter):
         #     messages = self.messages_to_dict(messages)
         return await self._achat_completion(messages)
 
-    @retry(
+    @retry( # TODO(jiahang): interesting. how to use pure python + asyncio to implement stream output?
         stop=stop_after_attempt(3),
         wait=wait_fixed(1),
         after=after_log(logger, logger.level("WARNING").name),
